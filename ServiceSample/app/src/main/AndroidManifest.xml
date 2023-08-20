@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
+        android:name=".ServiceSampleApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceSample"
         tools:targetApi="31">
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true"
+            />
+
+        <service
+            android:name=".MyForeGroundService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":foreground_service_process" />
+
+        <activity
+            android:name=".ForegroundServiceActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ServiceSample.AppCompat" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
